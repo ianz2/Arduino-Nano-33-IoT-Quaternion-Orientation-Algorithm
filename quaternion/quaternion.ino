@@ -33,38 +33,6 @@ Quaternion straight = Quaternion(0, 1, 0, 0);
 Quaternion qgEstimate = Quaternion(1, 0, 0, 0);
 Quaternion qsEstimate = Quaternion(1, 0, 0, 0);
 
-void motorClockwise(bool cw){
-  if(cw){
-    digitalWrite(input1, LOW);
-    digitalWrite(input2, HIGH);
-  } else {
-    digitalWrite(input2, LOW);
-    digitalWrite(input1, HIGH);
-  }
-}
-
-void motorStop(){
-  digitalWrite(input1, LOW);
-  digitalWrite(input2, LOW);
-}
-
-void takePicture(){
-  digitalWrite(ledPin, HIGH);
-  delay(100);
-  digitalWrite(ledPin, LOW);
-  delay(100);
-  digitalWrite(ledPin, HIGH);
-  delay(100);
-  digitalWrite(ledPin, LOW);
-  delay(100);
-  digitalWrite(ledPin, HIGH);
-
-  Consumer.write(MEDIA_VOLUME_UP);
-  delay(500);
-
-  digitalWrite(ledPin, LOW);
-}
-
 double crossProduct2d(double a, double b, double c, double d){
   return(a*d-c*b);
 }
@@ -206,15 +174,5 @@ void loop() {
     Serial.print(roll);
     Serial.print(",Yaw:");
     Serial.println(yaw);
-
-    if(roll < -5){
-      motorClockwise(true);
-      analogWrite(speedPin, 255);
-    } else if(roll > 5){
-      motorClockwise(false);
-      analogWrite(speedPin, 255);
-    } else {
-      motorStop();
-    }
   }
 }
